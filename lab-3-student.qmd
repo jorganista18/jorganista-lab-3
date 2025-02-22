@@ -1,3 +1,14 @@
+---
+title: "Lab 3: Importing Data"
+author: "Jacob Organista"
+date: "2/22/25"
+format: html
+self-contained: true
+editor: source
+embed-resources: true
+---
+
+
 # Part 1: Setup
 
 ## GitHub Workflow
@@ -148,7 +159,23 @@ It takes a larger cognitive load to read text that is rotated. It is common prac
 ```{r}
 #| label: boxplot
 
-
+ggplot(data = surveys,
+       mapping = aes(x = weight,
+                     y = hindfoot_length)) +
+  labs(x = "Weight (lbs)",
+       y = "",
+       subtitle = "Hindfoot Length") +
+ 
+  theme(axis.text.x = element_text(angle = 45)) +
+  theme(axis.text.y = element_text(angle = 45)) +
+  
+  geom_jitter(color = "dodgerblue3",
+              alpha = 1) +
+  geom_boxplot(outlier.shape = NA) +
+  
+  facet_wrap(~species) 
+  
+  
 ```
 
 **9. Create side-by-side boxplots to visualize the distribution of weight within each species.**
@@ -190,6 +217,22 @@ Some people (and journals) prefer for boxplots to be stacked with a specific ori
 ```{r}
 #| label: rotated-boxplot
 
+ggplot(data = surveys,
+       mapping = aes(x = weight,
+                     y = hindfoot_length)) +
+  labs(x = "Weight (lbs)",
+       y = "",
+       subtitle = "Hindfoot Length") +
+ 
+  theme(axis.text.x = element_text(angle = 45)) +
+  theme(axis.text.y = element_text(angle = 45)) +
+  
+
+  geom_jitter(color = "dodgerblue3",
+              alpha = 1) +
+  geom_boxplot(outlier.shape = NA) +
+  
+  facet_wrap(~species, ncol = 1) 
 ```
 
 Notice how vertically stacked boxplots make the species labels more readable than horizontally stacked boxplots (even when the axis labels are rotated). This is good practice!
@@ -201,8 +244,8 @@ Notice how vertically stacked boxplots make the species labels more readable tha
 For Lab 3 you will submit the link to your GitHub repository. Your rendered file is required to have the following specifications in the YAML options (at the top of your document):
 
 -   have the plots embedded (`embed-resources: true`)
--   include your source code (`code-tools: true`)
--   include all your code and output (`echo: true`)
+-   include your source code (`code-tools: true`) **When I included it kept giving errors for rendering
+-   include all your code and output (`echo: true`) **When I included it kept giving errors for rendering
 
 **If any of the options are not included, your Lab 3 or Challenge 3 assignment will receive an "Incomplete" and you will be required to submit a revision.**
 
